@@ -37,6 +37,27 @@ http://127.0.0.1:1233/api/rap2,{"method": "POST", "body": "text={{encodeURICompo
 # 语速最好设置为2.5     >2.5 就读的快， < 2.5 就读的慢
 ```
 
+## 方式二 使用 Docker
+
+```bash
+# 构建镜像
+docker build -t legado-edge-tts .
+
+# 运行容器（默认监听 1233 端口）
+docker run -d \
+    -p 1233:1233 \
+    --name legado-edge-tts \
+    legado-edge-tts
+
+# 调整并发/端口（可选）
+# docker run -d -p 8080:8080 -e PORT=8080 -e WORKERS=4 legado-edge-tts
+
+# docker-compose 直接启动
+docker-compose up -d
+```
+
+> GitHub Actions 会将镜像推送到 `ghcr.io/<owner>/legado-edge-tts`，可直接 `docker pull` 使用。
+
 ## APP添加朗读引擎  📢注意点击页面的"+"号添加 祝大家玩的开心!
 ![detail.png](https://raw.githubusercontent.com/wangz-code/legado-edge-tts/main/demo.gif)
 
@@ -67,7 +88,7 @@ http://127.0.0.1:1233/api/rap2,{"method": "POST", "body": "text={{encodeURICompo
 | voice_chat  | zh-CN-YunxiNeural    | 对话音色 |
 | volume_chat | 0                    | 对话音量 |
 
-## 方式二 使用 pm2 运行, 需要 node 环境
+## 方式三 使用 pm2 运行, 需要 node 环境
 
 ```bash
 # 如果没有node 需要先安装node, 推荐使用nvm  https://github.com/nvm-sh/nvm

@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  legado-edge-tts:
+    build: .
+    image: legado-edge-tts:latest
+    ports:
+      - "1233:1233"
+    environment:
+      - PORT=1233
+      - WORKERS=2
+    restart: unless-stopped
